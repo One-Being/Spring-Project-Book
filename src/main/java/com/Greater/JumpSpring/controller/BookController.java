@@ -3,6 +3,8 @@ package com.Greater.JumpSpring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,34 +27,36 @@ public class BookController {
 	BookService service;
 	
 	@PostMapping
-	public ResponseStructure<Book> saveBook(@RequestBody Book b) 
+	public ResponseEntity<ResponseStructure<Book>> saveBook(@RequestBody Book b) 
 	{
 		return service.saveBook(b);
 		
 	}
 	
 	@DeleteMapping
-	public  ResponseStructure<Book>deleteBook(@RequestParam int id) 
+	public  ResponseEntity<ResponseStructure<Book>> deleteBook(@RequestParam int id) 
 	{
 		return service.deleteBook(id);
 	}
 	
 	
+	
+	
 	@PutMapping
-	public  ResponseStructure<Book> updateBook(@RequestBody Book b, @RequestParam int id) 
+	public  ResponseEntity<ResponseStructure<Book>> updateBook(@RequestBody Book b, @RequestParam int id) 
 	{
 		return service.updateBook(b,id);
 		
 	}
 	
 	@GetMapping("/findallbooks")
-	public List<Book> findAllBook() 
+	public  ResponseEntity<ResponseStructure<List<Book>>> findAllBook() 
 	{
 		return service.findAllBook();
 	}
 	
 	@GetMapping
-	public  ResponseStructure<Book> findBook(@RequestParam int id) 
+	public  ResponseEntity<ResponseStructure<Book>> findBook(@RequestParam int id) 
 	{
 		return service.findBook(id);
 	}
